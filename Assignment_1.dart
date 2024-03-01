@@ -2,9 +2,13 @@ import 'dart:io';
 
 
 class Person{
-    
+    String personName="";
     Person(String inputName){
-        print("Name of the person $inputName");
+        personName=inputName;
+    }
+
+    void display(){
+      print(personName);
     }
 
 }
@@ -25,8 +29,9 @@ void main() {
     // 3. Create a list of fruits and print each fruit using a loop. Input: ['Apple', 'Banana', 'Orange', 'Grapes']
     // Output: Apple, Banana, Orange, Grapes
     List<String> fruitsList=["Apple, Banana, Orange, Grapes"];
-    print(fruitsList.join());
-
+    for (String fruit in fruitsList) {
+      print(fruit);
+    }
     //4. Define a function named 'multiply' that takes two parameters and returns their product. Input: 5, 2
     // Output: The product is 10.
     int result=multiply(5, 2);
@@ -36,7 +41,7 @@ void main() {
     // Input: Person person = Person(‘Agent Jack’) person.display()
     // Output: My name is Agent Jack
     Person person=Person("Agent Jack");
-
+    person.display();
     // 6. Define a Dart program that uses a map to store the age of different people and prints the ages.
     // Input: Map<String, int> ages = { 'Alice': 25,
     // 'Bob': 30,
@@ -47,14 +52,23 @@ void main() {
         'Bob': 30,
         'Charlie': 22
     };
-    printAges(ages);
-
+    ages.forEach((name, age) {
+      print('$name is $age years old');
+    });
     // 7. Write a Dart function that divides two numbers and handles the case when the denominator is zero. (USING Try Catch)
     // Input: 5, 2 | Input: 5, 0
     // Output: 2.5 | Output: Cannot divide by zero.
-
-    print(divideNumbers(5, 2)); 
-    print(divideNumbers(5, 0)); 
+    double? ans1=divideNumbers(5, 2);
+    double? ans2=divideNumbers(5, 0);
+    if(ans1!=null){
+        print("Division is: $ans1"); 
+    }
+  
+    if(ans2!=null){
+        print("Division is: $ans2"); 
+    }
+    
+    
 
     // 8. Write a Dart program that removes duplicates from a list and prints the unique elements. Input: [1, 2, 3, 2, 4, 5, 1, 6]
     // Output: [1, 2, 3, 4, 5, 6]
@@ -99,11 +113,14 @@ void main() {
             continue;
         }
         print(numbers[counter]);
+        
     }
+     print("\n");
     // 13. Create a Dart program that finds the first occurrence of a negative number in a list using 'break'.
     // Input: [5, 8, -3, 10, -7, 2] Output: 5, 8
     List<int> numbersList = [5, 8, -3, 10, -7, 2];
     findFirstNegative(numbersList);
+   
 
   
 
@@ -142,7 +159,7 @@ int  multiply(int number1, int number2)
 
 }
 
-double divideNumbers(int numerator, int denominator) {
+double? divideNumbers(int numerator, int denominator) {
   try {
     if (denominator == 0) {
       throw Exception('Cannot divide by zero.');
@@ -150,7 +167,7 @@ double divideNumbers(int numerator, int denominator) {
     return numerator / denominator;
   } catch (e) {
     print(e);
-    return -1; 
+    return null; 
   }
 }
 
@@ -240,8 +257,8 @@ void printAges(Map<String, int> ages) {
 
   void findFirstNegative(List<int> numbersList) {
         for (int number in numbersList) {
+            
             if (number < 0) {
-            print(number);
             break; 
             }
             print(number);
